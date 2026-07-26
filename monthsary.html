@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Happy Monthsary ❤️</title>
+
+    <!-- Mobile responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        :root {
+            color-scheme: dark;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            min-height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+            background:
+                radial-gradient(circle at top, #ffd6e7 0%, transparent 40%),
+                radial-gradient(circle at bottom, #ff7aa2 0%, transparent 35%),
+                linear-gradient(135deg, #30001b, #650028, #ff4d88);
+            background-size: 200% 200%;
+            background-attachment: fixed;
+            animation: bgMove 12s ease infinite;
+            transition: background 0.25s ease;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(circle 220px at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, 0.18), rgba(255, 105, 180, 0.12) 28%, rgba(255, 105, 180, 0.04) 55%, transparent 75%);
+            mix-blend-mode: screen;
+            z-index: 0;
+            transition: background 0.15s ease-out;
+        }
+
+        @keyframes bgMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        img {
+            width: 80%;
+            max-width: 300px;
+            height: auto;
+            cursor: pointer;
+            user-select: none;
+            transform-origin: center center;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        #rose {
+            opacity: 0;
+            transform: scale(0.5);
+            animation: roseFadeIn 1s ease-out forwards, roseFloat 2.6s ease-in-out infinite;
+            filter: drop-shadow(0 0 12px rgba(255, 105, 180, 0.7));
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        #rose:hover {
+            transform: scale(1.05) rotate(-3deg);
+            filter: drop-shadow(0 0 18px rgba(255, 105, 180, 0.95));
+        }
+
+        @keyframes roseFadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes roseFloat {
+
+            0%,
+            100% {
+                transform: translateY(0px) scale(1);
+            }
+
+            50% {
+                transform: translateY(-10px) scale(1.02);
+            }
+        }
+
+        #envelope,
+        #message {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            display: none;
+        }
+
+        #envelope {
+            filter: drop-shadow(0 0 14px rgba(255, 105, 180, 0.65));
+            transition: transform 0.3s ease, filter 0.3s ease;
+            animation: envelopeFloat 2.8s ease-in-out infinite;
+        }
+
+        #envelope:hover {
+            transform: scale(1.04) rotate(-2deg);
+            filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.95));
+        }
+
+        @keyframes envelopeFloat {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        #envelope.show,
+        #message.show {
+            opacity: 1;
+            transform: scale(1);
+            display: block;
+        }
+
+        #content {
+            display: none;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 30px;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 24px;
+        }
+
+        #content.show {
+            display: flex;
+        }
+
+        #message {
+            flex: 1;
+            max-width: 560px;
+            padding: 0 32px;
+            max-height: min(78vh, 760px);
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+            background: rgba(255, 249, 230, 0.95);
+            border: 2px solid transparent;
+            border-radius: 16px;
+            box-shadow:
+                0 0 12px rgba(255, 215, 0, 0.55),
+                0 0 24px rgba(255, 192, 203, 0.45),
+                0 0 36px rgba(255, 105, 180, 0.35);
+            font-size: 0.95rem;
+            color: #6f5500;
+            font-family: Georgia, serif;
+            text-align: justify;
+            line-height: 1.7;
+            box-sizing: border-box;
+            margin: 0;
+            transform-origin: left center;
+            transform: perspective(1000px) rotateY(-24deg) translateX(-24px) scale(0.96);
+            clip-path: inset(0 100% 0 0);
+            opacity: 0;
+            will-change: transform, clip-path, box-shadow;
+            transition: max-height 0.95s cubic-bezier(0.2, 0.8, 0.2, 1),
+                padding 0.95s cubic-bezier(0.2, 0.8, 0.2, 1),
+                opacity 0.6s ease, transform 0.95s cubic-bezier(0.2, 0.8, 0.2, 1),
+                border-color 0.5s ease, clip-path 0.95s cubic-bezier(0.2, 0.8, 0.2, 1);
+            animation: messageGlow 2.8s ease-in-out infinite;
+        }
+
+        #message.show {
+            opacity: 1;
+            max-height: min(78vh, 760px);
+            padding: 28px 32px;
+            border-color: #b59400;
+            transform: perspective(1000px) rotateY(0deg) translateX(0) scale(1);
+            clip-path: inset(0 0 0 0);
+            animation: messageUnfold 0.95s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        @keyframes messageGlow {
+
+            0%,
+            100% {
+                box-shadow:
+                    0 0 10px rgba(255, 215, 0, 0.45),
+                    0 0 20px rgba(255, 192, 203, 0.35),
+                    0 0 30px rgba(255, 105, 180, 0.25);
+            }
+
+            50% {
+                box-shadow:
+                    0 0 16px rgba(255, 215, 0, 0.65),
+                    0 0 28px rgba(255, 192, 203, 0.5),
+                    0 0 40px rgba(255, 105, 180, 0.4);
+            }
+        }
+
+        @keyframes messageUnfold {
+            0% {
+                transform: perspective(1000px) rotateY(-24deg) translateX(-24px) scale(0.96);
+                clip-path: inset(0 100% 0 0);
+                filter: blur(1.5px);
+            }
+
+            60% {
+                transform: perspective(1000px) rotateY(-8deg) translateX(-8px) scale(0.985);
+                clip-path: inset(0 20% 0 0);
+            }
+
+            100% {
+                transform: perspective(1000px) rotateY(0deg) translateX(0) scale(1);
+                clip-path: inset(0 0 0 0);
+                filter: blur(0);
+            }
+        }
+
+        #gallery {
+            width: 320px;
+            height: 700px;
+            overflow-y: hidden;
+            border-radius: 25px;
+            padding: 10px;
+            display: none;
+            opacity: 0;
+            margin: 0;
+            align-self: flex-start;
+            transition: 0.8s;
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(14px);
+            box-shadow:
+                0 0 25px rgba(255, 255, 255, 0.35),
+                0 0 45px rgba(255, 105, 180, 0.45);
+        }
+
+        #gallery.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .slider {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .memory {
+            width: 300px;
+            max-width: 320px;
+            height: auto;
+            margin: 10px auto;
+            object-fit: cover;
+            display: block;
+            border: 5px solid white;
+            border-radius: 18px;
+            box-shadow:
+                0 0 15px white,
+                0 0 30px hotpink,
+                0 0 50px deeppink;
+            animation: float 4s ease-in-out infinite, glow 2s alternate infinite;
+            transition: 0.4s;
+        }
+
+        .memory:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes glow {
+            from {
+                box-shadow:
+                    0 0 10px white,
+                    0 0 20px hotpink;
+            }
+
+            to {
+                box-shadow:
+                    0 0 20px white,
+                    0 0 40px hotpink,
+                    0 0 70px deeppink;
+            }
+        }
+
+        .floating-emoji {
+            position: fixed;
+            font-size: 2rem;
+            pointer-events: none;
+            z-index: 5;
+            animation: floatEmoji 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+        }
+
+        .tap-hint {
+            position: fixed;
+            top: 22%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff6f9;
+            font-size: 0.95rem;
+            font-family: Georgia, serif;
+            letter-spacing: 0.04em;
+            opacity: 0.9;
+            animation: pulseHint 1.5s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 6;
+        }
+
+        .emoji-heart-eyes {
+            top: 8%;
+            left: 6%;
+            animation-duration: 3.4s;
+            transform: rotate(-10deg);
+        }
+
+        .emoji-kiss {
+            bottom: 10%;
+            right: 7%;
+            animation-duration: 3s;
+            transform: rotate(8deg);
+        }
+
+        .emoji-hearts {
+            top: 24%;
+            right: 8%;
+            animation-duration: 2.6s;
+            transform: rotate(12deg);
+        }
+
+        .emoji-sparkles {
+            bottom: 24%;
+            left: 8%;
+            animation-duration: 3.6s;
+            transform: rotate(-6deg);
+        }
+
+        @keyframes floatEmoji {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg) scale(1);
+                opacity: 0.85;
+            }
+
+            50% {
+                transform: translateY(-12px) rotate(8deg) scale(1.08);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulseHint {
+
+            0%,
+            100% {
+                transform: translateX(-50%) scale(1);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: translateX(-50%) scale(1.05);
+                opacity: 1;
+            }
+        }
+
+        .cursor-trail {
+            position: fixed;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 8;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 182, 193, 0.8) 35%, rgba(255, 105, 180, 0.25) 70%, transparent 100%);
+            transform: translate(-50%, -50%);
+            mix-blend-mode: screen;
+            filter: blur(1px);
+            opacity: 0.85;
+            transition: transform 0.12s ease-out, opacity 0.2s ease;
+        }
+
+        .burst {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 7;
+            animation: burstPop 0.8s ease-out forwards;
+        }
+
+        @keyframes burstPop {
+            0% {
+                transform: scale(0.2);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(var(--x), var(--y)) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                justify-content: flex-start;
+                align-items: center;
+                padding: 24px 14px 40px;
+                background-attachment: scroll;
+            }
+
+            body>* {
+                position: relative;
+                z-index: 1;
+            }
+
+            #content {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                margin-top: 20px;
+                width: min(100%, 620px);
+            }
+
+            #message {
+                width: 100%;
+                max-width: 560px;
+                max-height: min(70vh, 720px);
+                padding: 24px 22px;
+                font-size: 0.92rem;
+                transform: perspective(1000px) rotateY(-12deg) translateX(-12px) scale(0.98);
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior: contain;
+            }
+
+            #message.show {
+                transform: perspective(1000px) rotateY(0deg) translateX(0) scale(1);
+            }
+
+            #gallery {
+                width: 100%;
+                max-width: 560px;
+                height: 420px;
+                padding: 8px;
+                overflow-y: auto;
+                overflow-x: hidden;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            #rose,
+            #envelope {
+                width: min(72vw, 240px);
+                max-width: 240px;
+            }
+
+            .memory {
+                width: 100%;
+                max-width: 320px;
+                margin: 8px auto;
+                object-fit: contain;
+            }
+
+            .floating-emoji {
+                font-size: 1.4rem;
+            }
+
+            .tap-hint {
+                top: 18%;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="cursor-trail" id="cursorTrail"></div>
+    <div class="floating-emoji emoji-heart-eyes">😍</div>
+    <div class="floating-emoji emoji-kiss">😘</div>
+    <div class="floating-emoji emoji-hearts">💖</div>
+    <div class="floating-emoji emoji-sparkles">✨</div>
+
+    <img id="rose" src="https://webstockreview.net/images/clipart-rose-rose-bud-17.png" alt="Rose">
+
+
+    <img id="envelope"
+        src="https://static.vecteezy.com/system/resources/previews/028/078/408/non_2x/pink-love-letter-envelope-free-png.png"
+        alt="Envelope">
+
+
+
+    <audio id="song">
+
+        <source src="Claire Marlo- Till They Take My Heart Away.mp3" type="audio/mpeg">
+
+    </audio>
+
+
+    <div id="content">
+
+        <!-- Message section -->
+        <div id="message">
+            Dear baba,<br><br>
+
+            Happy 27th monthsary to us! ❤️<br><br>
+
+            Hi bebe, hindi pa rin ako makapaniwala hanggang ngayon na magiging tayo at aabot tayo ng ganito. Two years
+            and 3 months and kahit hindi tayo palaging nagkikita at nagsasama simula noong bakasyon hanggang ngayon na
+            college, ay hindi pa rin nagbabago pagmamahal ko sa'yo. Thankful ako na pinipili pa rin nating magstay,
+            kahit madalas tayong di nag chchat sa messenger. <br><br>
+
+            Sabi mo na di totoo ang di nakakachat kapag pagod na pagod dahil sabi mo ang tao ay may apat na battery
+            which is phosphates na nag sstore ng ATP = energy, well guilty ako dun hehe. Sorry kung hindi kita na
+            chchat ngayon dahil naglalaro ako or kung ano man ang ginagawa ko. I really appreciate your patience,
+            especially your efforts na ginagawan mo ng paraan para mag chat ikaw kahit busy sa school works. I'm
+            so lucky to have you, my bebe! <br><br>
+
+            Thank you for always making me feel loved. Thank you for listening to my random stories kahit minsan wala
+            nang sense. Thank you for celebrating my wins with me and comforting me kapag down ako. Thank you for
+            being patient, caring, understanding, and for simply being you.<br><br>
+
+            I know hindi tayo perfect na couple. Nagkakatampuhan tayo, nagkakamali tayo, at may mga pagkakataong hindi
+            tayo nagkakaintindihan. Pero gusto kong malaman mo na ikaw pa rin ang pipiliin ko. Kahit ilang beses pa
+            tayong mag-away, gusto ko pa rin na sa dulo ikaw pa rin ang kasama ko. Kasi ikaw ang peace ko, ikaw ang
+            comfort ko, at ikaw ang favorite person ko.<br><br>
+
+            I'll do my best to become a better boyfriend for you. Gagawin ko ang best ko na mas maging consistent sa
+            pag-chat, mas bigyan ka ng oras, at mas maiparamdam sa'yo kung gaano kita kamahal. Hindi man ako perfect,
+            pero araw-araw pipiliin kong mag-improve para sa'tin. Deserve mo ang best version ko, at gusto kong ibigay
+            'yon sa'yo.<br><br>
+
+            I hope marami pa tayong monthsaries, anniversaries, birthdays, late-night calls, random dates, food trips,
+            adventures, at memories na pagsasaluhan. Sana kahit gaano pa tayo ka-busy sa future, hindi natin
+            makalimutang piliin ang isa't isa. I want to keep growing with you, laughing with you, and making memories
+            with you. Ikaw pa rin ang gusto kong makasama sa lahat ng susunod na chapters ng buhay ko.<br><br>
+
+            Thank you for staying.
+            Thank you for loving me.
+            Thank you for choosing me every single day.<br><br>
+
+            I love you so much, baba ko. ❤️<br><br>
+
+            Happy 27th monthsary ulit sa atin. Here's to more months, more years, and hopefully a lifetime with
+            you.<br><br>
+
+            Always and only yours,<br>
+
+            <b>sef</b>
+        </div>
+
+        <!-- Gallery section -->
+        <div id="gallery">
+
+            <div class="slider">
+
+                <img src="d041946a-5934-4289-9d57-e2edb3439adb.jpg" class="memory">
+
+                <img src="7c97781d-29af-465a-9a75-6173542ab181.jpg" class="memory">
+
+                <img src="66bf3752-a9c9-4bd0-bd1b-959985b5befb.jpg" class="memory">
+
+                <img src="8a44a7cf-8b4b-45ef-bb12-e9799734fa51.jpg" class="memory">
+
+                <img src="dd7d0210-e102-42e8-9151-d339f922468d.jpg" class="memory">
+
+
+
+                <img src="d041946a-5934-4289-9d57-e2edb3439adb.jpg" class="memory">
+
+                <img src="7c97781d-29af-465a-9a75-6173542ab181.jpg" class="memory">
+
+                <img src="66bf3752-a9c9-4bd0-bd1b-959985b5befb.jpg" class="memory">
+
+                <img src="8a44a7cf-8b4b-45ef-bb12-e9799734fa51.jpg" class="memory">
+
+                <img src="dd7d0210-e102-42e8-9151-d339f922468d.jpg" class="memory">
+
+
+
+
+            </div>
+
+        </div>
+
+        <script>
+
+            const content = document.getElementById("content");
+            const rose = document.getElementById("rose");
+            const envelope = document.getElementById("envelope");
+            const message = document.getElementById("message");
+            const song = document.getElementById("song");
+            const gallery = document.getElementById("gallery");
+            const slider = document.querySelector(".slider");
+            const cursorTrail = document.getElementById("cursorTrail");
+
+            if (slider) {
+                slider.innerHTML += slider.innerHTML;
+            }
+
+            let speed = 1;
+
+            function autoScroll() {
+                gallery.scrollTop += speed;
+
+                if (gallery.scrollTop >= slider.scrollHeight / 2) {
+                    gallery.scrollTop = 0;
+                }
+
+                requestAnimationFrame(autoScroll);
+            }
+
+            autoScroll();
+
+            document.addEventListener('mousemove', (e) => {
+                const x = `${e.clientX}px`;
+                const y = `${e.clientY}px`;
+                cursorTrail.style.left = x;
+                cursorTrail.style.top = y;
+                cursorTrail.style.opacity = '0.85';
+                document.body.style.setProperty('--x', x);
+                document.body.style.setProperty('--y', y);
+            });
+
+            document.addEventListener('mouseleave', () => {
+                cursorTrail.style.opacity = '0';
+            });
+
+            song.play().catch(() => { });
+
+            rose.addEventListener('click', () => {
+
+
+                song.play();
+
+
+                rose.style.pointerEvents = "none";
+
+
+                rose.style.transform = "scale(1.2)";
+
+                rose.style.opacity = "0";
+
+
+
+                setTimeout(() => {
+
+
+                    rose.style.display = "none";
+
+
+                    envelope.style.display = "block";
+
+
+                    void envelope.offsetWidth;
+
+
+                    envelope.classList.add("show");
+
+
+                }, 500);
+
+
+
+            });
+
+
+
+
+
+
+            envelope.addEventListener("click", () => {
+                envelope.classList.remove("show");
+                envelope.style.opacity = "0";
+
+                setTimeout(() => {
+                    envelope.style.display = "none";
+                    content.classList.add("show");
+                    message.classList.add("show");
+                    message.scrollTop = 0;
+
+                    const paragraphs = message.querySelectorAll('p');
+                    paragraphs.forEach((p, index) => {
+                        p.style.opacity = '0';
+                        p.style.transform = 'translateY(12px)';
+                        setTimeout(() => {
+                            p.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                            p.style.opacity = '1';
+                            p.style.transform = 'translateY(0)';
+                        }, 120 * index + 200);
+                    });
+
+                    setTimeout(() => {
+                        gallery.style.display = "flex";
+                        void gallery.offsetWidth;
+                        gallery.classList.add("show");
+                    }, 1000);
+                }, 500);
+            });
+
+
+
+        </script>
+
+
+</body>
+
+</html>
